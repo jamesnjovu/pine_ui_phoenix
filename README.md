@@ -1,5 +1,8 @@
 # Pine UI
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)]()
+[![Phoenix Framework](https://img.shields.io/badge/Phoenix Framework-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)]()
+[![AlpineJS](https://img.shields.io/badge/AlpineJS-38B2AC?style=for-the-badge&logo=alpinejs-css&logoColor=white)]()
+
 [Pine UI](https://devdojo.com/pines)
 
 A **comprehensive** and **user-friendly boilerplate**, designed to expedite the development process of **MERN Stack Dashboards**, providing developers with an extensive range of **components** and **features**.
