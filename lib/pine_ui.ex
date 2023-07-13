@@ -4,7 +4,11 @@ defmodule PineUi do
   """
 
   use Phoenix.Component
-  alias PineUi.Text
+
+  alias PineUi.{
+    Text,
+    Tooltip
+  }
 
   @doc """
   Typing Effect.
@@ -43,8 +47,15 @@ defmodule PineUi do
     assigns =
       assign_new(assigns, :title, fn -> "hover me" end)
       |> assign_new(:description, fn -> "Tooltip text" end)
-      |> assign_new(:class, fn -> "px-3 py-1 text-xs rounded-full cursor-pointer text-neutral-500 bg-neutral-100" end)
+      |> assign_new(:type, fn -> nil end)
+      |> assign_new(:class, fn ->
+        "px-3 py-1 text-xs rounded-full cursor-pointer text-neutral-500 bg-neutral-100"
+      end)
 
-    Text.tooltip_top(assigns)
+    case assigns.type do
+      "left" -> Tooltip.left(assigns)
+      "right" -> Tooltip.right(assigns)
+      _ -> Tooltip.top(assigns)
+    end
   end
 end
