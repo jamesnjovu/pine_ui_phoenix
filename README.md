@@ -1,7 +1,7 @@
 # Pine UI
 
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)]()
-[![Phoenix Framework](https://img.shields.io/badge/Phoenix%20Framework-38B2AC?style=for-the-badge&logo=elixir&logoColor=white)]()
+[![Phoenix Framework](https://img.shields.io/badge/Phoenix_20Framework-38B2AC?style=for-the-badge&logo=elixir&logoColor=white)]()
 [![AlpineJS](https://img.shields.io/badge/AlpineJS-38B2AC?style=for-the-badge&logo=alpinejs&logoColor=white)]()
 
 [Pine UI](https://devdojo.com/pines)
@@ -24,29 +24,17 @@ end
 
 ## Usage
 
-The components are provided by the `Heroicons` module. Each icon is a Phoenix Component you can use in your HEEx templates.
-
-By default, the icon components will use the outline style, but the `solid` or
-`mini` attributes may be passed to select styling, for example:
+The components are provided by the `Pine UI` module. Each element is a Phoenix Component you can use in your HEEx templates.
 
 ```eex
-<Heroicons.cake />
-<Heroicons.cake solid />
-<Heroicons.cake mini />
-```
-
-You can also pass arbitrary HTML attributes to the components, such as classes:
-
- ```eex
-<Heroicons.cake class="w-2 h-2" />
-<Heroicons.cake solid class="w-2 h-2 text-gray-500" />
+ <PineUi.typing_effect
+  text_list={Poison.encode!(["I'm here james", "All mightily push"])}
+  class="item-center justify-center"
+  text_class="text-2xl font-black leading-tight"
+/>
 ```
 
 After that, run `mix deps.get`.
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/pine_ui>.
 
 # Features
 This innovative project showcases a comprehensive range of powerful and cutting-edge features, seamlessly integrating the following capabilities:
