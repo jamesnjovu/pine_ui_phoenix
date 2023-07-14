@@ -37,21 +37,20 @@ defmodule PineUi do
 
   ## Examples
 
-      <PineUI.text_animation_blow text="Pines UI Library" />
+      <PineUi.text_animation_blow text="Pines UI Library" />
   """
   def text_animation_blow(assigns) do
-    assigns =
-      assign_new(assigns, :text, fn -> "Pines UI Library" end)
+    assigns = assign_new(assigns, :text, fn -> "Pines UI Library" end)
 
     Text.animation_blow(assigns)
   end
 
   @doc """
-  Tooltip Top.
+  Tooltip.
 
   ## Examples
 
-      <PineUI.tooltip
+      <PineUi.tooltip
         title="Hover Me"
         description="Tooltip text"
         class="px-3 py-1 text-xs rounded-full cursor-pointer text-neutral-500 bg-neutral-100"
@@ -71,5 +70,18 @@ defmodule PineUi do
       "right" -> Tooltip.right(assigns)
       _ -> Tooltip.top(assigns)
     end
+  end
+
+  @doc """
+  Text Animation Fade.
+
+  ## Examples
+
+      <PineUI.text_animation_fade text="Pines UI Library" />
+  """
+  def text_animation_fade(assigns) do
+    assigns = assign_new(assigns, :text, fn -> "Pines UI Library" end)
+
+    Text.animation_fade(assigns)
   end
 end
