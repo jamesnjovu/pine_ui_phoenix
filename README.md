@@ -17,7 +17,7 @@ Add Pine UI to your `mix.exs`:
 ```elixir
 def deps do
   [
-    {:pine_ui, "~> 0.1.0"}
+    {:pine_ui_phoenix, "~> 0.1.0"}
   ]
 end
 ```
