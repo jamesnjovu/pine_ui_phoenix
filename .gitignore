@@ -24,3 +24,6 @@ pine_ui-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+/.idea/
+pine_ui.iml
+mix.lock
