@@ -1,7 +1,31 @@
 defmodule PineUi.Button do
-  @moduledoc false
-  use Phoenix.Component
+  @moduledoc """
+  Provides card components for organizing content with various behaviors.
 
+  The Card module offers three main variants:
+
+  - `basic/1` - Simple card with title, subtitle, content area, and optional footer
+  - `interactive/1` - Card with hover animation effects
+  - `collapsible/1` - Expandable/collapsible card with toggle functionality
+
+  ## Examples
+
+      <PineUi.card title="User Profile" subtitle="Personal information">
+        <p>Card content here</p>
+      </PineUi.card>
+
+      <PineUi.card_interactive>
+        <p>This card has hover effects</p>
+      </PineUi.card_interactive>
+
+      <PineUi.card_collapsible title="Click to expand" open={false}>
+        <p>This content can be hidden</p>
+      </PineUi.card_collapsible>
+
+  ## Styling
+
+  Cards use TailwindCSS for styling and can be customized using the `class` parameter.
+  """
   def primary(assigns) do
     ~H"""
     <button
@@ -32,6 +56,30 @@ defmodule PineUi.Button do
     """
   end
 
+  @doc """
+  Renders a secondary button component with optional loading state.
+
+  Secondary buttons are often used for secondary actions or alternative options.
+
+  ## Examples
+
+      <.secondary>Cancel</.secondary>
+
+      <.secondary loading={@processing} phx_click="back">
+        Go Back
+      </.secondary>
+
+  ## Options
+
+  * `:type` - Button type attribute (optional, defaults to "button")
+  * `:class` - Additional CSS classes (optional)
+  * `:disabled` - Whether the button is disabled (optional, defaults to false)
+  * `:loading` - Whether to show loading state (optional, defaults to false)
+  * `:icon` - HTML string for an icon to display before text (optional)
+  * `:phx_click` - The LiveView click event to trigger (optional)
+  * `:phx_value_id` - The id value to pass with the event (optional)
+  * `:phx_target` - The LiveView target for the event (optional)
+  """
   def secondary(assigns) do
     ~H"""
     <button
@@ -62,6 +110,30 @@ defmodule PineUi.Button do
     """
   end
 
+  @doc """
+  Renders a danger button component with optional loading state.
+
+  Danger buttons should be used for destructive actions such as delete or remove.
+
+  ## Examples
+
+      <.danger>Delete Account</.danger>
+
+      <.danger loading={@deleting} phx_click="delete" phx_value_id={@item.id}>
+        Remove Item
+      </.danger>
+
+  ## Options
+
+  * `:type` - Button type attribute (optional, defaults to "button")
+  * `:class` - Additional CSS classes (optional)
+  * `:disabled` - Whether the button is disabled (optional, defaults to false)
+  * `:loading` - Whether to show loading state (optional, defaults to false)
+  * `:icon` - HTML string for an icon to display before text (optional)
+  * `:phx_click` - The LiveView click event to trigger (optional)
+  * `:phx_value_id` - The id value to pass with the event (optional)
+  * `:phx_target` - The LiveView target for the event (optional)
+  """
   def danger(assigns) do
     ~H"""
     <button

@@ -1,7 +1,54 @@
 defmodule PineUi.Card do
-  @moduledoc false
+  @moduledoc """
+  Provides card components for organizing content with various behaviors.
+
+  The Card module offers three main variants:
+
+  - `basic/1` - Simple card with title, subtitle, content area, and optional footer
+  - `interactive/1` - Card with hover animation effects
+  - `collapsible/1` - Expandable/collapsible card with toggle functionality
+
+  ## Examples
+
+      <PineUi.card title="User Profile" subtitle="Personal information">
+        <p>Card content here</p>
+      </PineUi.card>
+
+      <PineUi.card_interactive>
+        <p>This card has hover effects</p>
+      </PineUi.card_interactive>
+
+      <PineUi.card_collapsible title="Click to expand" open={false}>
+        <p>This content can be hidden</p>
+      </PineUi.card_collapsible>
+
+  ## Styling
+
+  Cards use TailwindCSS for styling and can be customized using the `class` parameter.
+  """
   use Phoenix.Component
 
+  @doc """
+  Renders a basic card component.
+
+  ## Examples
+
+      <.basic title="Card Title">
+        <p>Content goes here</p>
+      </.basic>
+
+      <.basic title="Card with Footer" subtitle="With explanation" footer="Last updated: Yesterday">
+        <p>Content goes here</p>
+      </.basic>
+
+  ## Options
+
+  * `:title` - Card title text (optional)
+  * `:subtitle` - Card subtitle text (optional)
+  * `:footer` - Footer content (optional)
+  * `:padded` - Whether to add padding to the body (optional, defaults to true)
+  * `:class` - Additional CSS classes for the card container (optional)
+  """
   def basic(assigns) do
     ~H"""
     <div class={"overflow-hidden bg-white shadow rounded-lg #{Map.get(assigns, :class, "")}"}>
@@ -30,6 +77,30 @@ defmodule PineUi.Card do
   defp get_body_padding(true), do: "px-4 py-5 sm:p-6"
   defp get_body_padding(false), do: ""
 
+  @doc """
+  Renders an interactive card component with hover effects.
+
+  This card variant adds subtle animation effects when hovered,
+  making it ideal for clickable cards or emphasizing important content.
+
+  ## Examples
+
+      <.interactive>
+        <p>Hover over me to see effects</p>
+      </.interactive>
+
+      <.interactive title="Interactive Card" subtitle="With animations">
+        <p>Content with hover effects</p>
+      </.interactive>
+
+  ## Options
+
+  * `:title` - Card title text (optional)
+  * `:subtitle` - Card subtitle text (optional)
+  * `:footer` - Footer content (optional)
+  * `:padded` - Whether to add padding to the body (optional, defaults to true)
+  * `:class` - Additional CSS classes for the card container (optional)
+  """
   def interactive(assigns) do
     ~H"""
     <div
@@ -61,6 +132,31 @@ defmodule PineUi.Card do
     """
   end
 
+  @doc """
+  Renders a collapsible card component with expand/collapse functionality.
+
+  This card can be toggled between expanded and collapsed states by clicking
+  on the header. Uses AlpineJS for the toggle functionality.
+
+  ## Examples
+
+      <.collapsible title="Click to toggle">
+        <p>This content can be hidden</p>
+      </.collapsible>
+
+      <.collapsible title="Initially expanded" open={true}>
+        <p>This content is visible by default</p>
+      </.collapsible>
+
+  ## Options
+
+  * `:title` - Card title text (optional)
+  * `:subtitle` - Card subtitle text (optional)
+  * `:footer` - Footer content (optional)
+  * `:padded` - Whether to add padding to the body (optional, defaults to true)
+  * `:open` - Whether the card is expanded on initial render (optional, defaults to false)
+  * `:class` - Additional CSS classes for the card container (optional)
+  """
   def collapsible(assigns) do
     ~H"""
     <div

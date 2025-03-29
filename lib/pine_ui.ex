@@ -1,10 +1,10 @@
 defmodule PineUi do
-  @moduledoc """
-  Pine UI is a collection of Phoenix components built with AlpineJS and TailwindCSS.
+ @moduledoc """
+  # Pine UI 🌲
 
-  This library provides a set of interactive UI components that can be used in Phoenix LiveView
-  applications. The components leverage the simplicity of AlpineJS for interactivity and
-  TailwindCSS for styling.
+  Pine UI is a comprehensive collection of UI components for Phoenix applications,
+  built with AlpineJS and TailwindCSS. The library provides interactive, accessible,
+  and customizable components to speed up development of modern web interfaces.
 
   ## Installation
 
@@ -18,54 +18,93 @@ defmodule PineUi do
   end
   ```
 
-  After running `mix deps.get`, make sure your application includes:
+  After running `mix deps.get`, make sure your project includes:
 
-  1. TailwindCSS - For styling components
-  2. AlpineJS - For component interactivity
+  1. **TailwindCSS** - For component styling
+  2. **AlpineJS** - For component interactivity
 
-  ## Usage Example
+  ## Component Categories
 
-  ```heex
-  <PineUi.typing_effect
-    text_list={Poison.encode!(["Welcome to my site", "Built with Phoenix", "And Pine UI"])}
-    class="flex justify-center"
-    text_class="text-2xl font-bold text-indigo-600"
-  />
+  Pine UI offers components organized in the following categories:
 
-  <PineUi.tooltip
-    title="Need help?"
-    description="Click for assistance"
-    type="top"
-    class="px-3 py-2 text-sm rounded-md bg-indigo-100 text-indigo-700 hover:bg-indigo-200"
-  />
-  ```
-
-  ## Available Components
-
+  ### Text & Animation
   - `typing_effect/1` - Creates a typing animation with multiple text items
   - `text_animation_blow/1` - Letter-by-letter animation that scales in
   - `text_animation_fade/1` - Letter-by-letter fade-in animation
-  - `tooltip/1` - Interactive tooltip with different positions (top, left, right)
-  - `button_primary/1` - Primary action button with loading state
-  - `button_secondary/1` - Secondary action button with loading state
-  - `button_danger/1` - Danger action button with loading state
-  - `badge/1` - Simple badge component with various colors
-  - `badge_dot/1` - Badge with dot indicator
-  - `badge_dismissible/1` - Badge that can be dismissed/removed
+
+  ### Interactive Elements
+  - `tooltip/1` - Interactive tooltip with different positions
+  - `button_primary/1`, `button_secondary/1`, `button_danger/1` - Button variants with loading states
+
+  ### Content Organization
   - `card/1` - Basic card component for content organization
   - `card_interactive/1` - Interactive card with hover effects
   - `card_collapsible/1` - Collapsible card for expandable content
-  - `select/1` - Basic select dropdown component
-  - `select_grouped/1` - Select dropdown with option groups
-  - `select_searchable/1` - Searchable select dropdown with filtering
+
+  ### Form Elements
   - `text_input/1` - Basic text input component
   - `text_input_with_icon/1` - Text input with icon
   - `textarea/1` - Multiline text input component
+  - `select/1` - Basic select dropdown component
+  - `select_grouped/1` - Select dropdown with option groups
+  - `select_searchable/1` - Searchable select dropdown with filtering
 
-  ## Component Options
+  ### Status Indicators
+  - `badge/1` - Simple badge component with various colors
+  - `badge_dot/1` - Badge with dot indicator
+  - `badge_dismissible/1` - Badge that can be dismissed/removed
 
-  Each component accepts specific options as assigns. See the documentation for
-  individual functions for details.
+  ## Basic Usage
+
+  ```heex
+  <div class="p-8 space-y-4">
+    <PineUi.text_animation_blow text="Welcome to Pine UI" />
+
+    <PineUi.card title="Getting Started">
+      <p>Pine UI makes it easy to build interactive Phoenix applications.</p>
+
+      <div class="mt-4 flex space-x-2">
+        <PineUi.button_primary>
+          Get Started
+        </PineUi.button_primary>
+
+        <PineUi.button_secondary>
+          Documentation
+        </PineUi.button_secondary>
+      </div>
+    </PineUi.card>
+
+    <PineUi.typing_effect
+      text_list={Poison.encode!(["Easy to use", "Highly customizable", "Interactive components"])}
+      class="flex justify-center"
+      text_class="text-xl font-medium text-indigo-600"
+    />
+  </div>
+  ```
+
+  ## Component Design Philosophy
+
+  Pine UI components follow these principles:
+
+  1. **Progressive Enhancement** - Components work without JavaScript but provide enhanced experiences when it's available
+  2. **Accessibility Built-in** - ARIA attributes and keyboard navigation included by default
+  3. **Tailwind-first** - Styled with TailwindCSS for easy customization and consistency
+  4. **Alpine-powered** - Interactive behaviors handled by AlpineJS for minimal overhead
+  5. **Phoenix-friendly** - Designed to work seamlessly with Phoenix and LiveView
+
+  ## Customization
+
+  Each component accepts class names that can be used to customize the appearance.
+  Common parameters include:
+
+  - `:class` - Additional CSS classes for the main element
+  - `:container_class` - CSS classes for the container element
+  - `:variant` - For components with multiple style variants (success, warning, etc.)
+
+  ## Accessibility
+
+  Pine UI components are designed with accessibility in mind, following WCAG guidelines.
+  Components include appropriate ARIA roles, states, and properties where applicable.
   """
 
   use Phoenix.Component
