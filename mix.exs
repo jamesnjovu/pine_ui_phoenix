@@ -56,11 +56,10 @@ defmodule PineUi.MixProject do
   defp docs do
     [
       main: "PineUi",
-      logo: "assets/logo.png",
+#      logo: "assets/logo.png",
       extras: [
         "README.md": [title: "Overview"],
-        "LICENSE.md": [title: "License"],
-        "CHANGELOG.md": [title: "Changelog"]
+        "LICENSE": [title: "License"],
       ],
       groups_for_modules: [
         "Text Components": [

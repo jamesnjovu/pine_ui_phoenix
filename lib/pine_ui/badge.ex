@@ -1,12 +1,37 @@
 defmodule PineUi.Badge do
-  @moduledoc false
-  use Phoenix.Component
+  @moduledoc """
+  Provides badge components for status indicators.
 
+  The Badge module offers several variants for indicating status:
+  - `base/1` - Simple colored badge
+  - `dot/1` - Badge with a status dot
+  - `dismissible/1` - Badge that can be dismissed
+  """
+  use Phoenix.Component
+  import Phoenix.HTML
+
+  @doc """
+  Renders a basic badge component.
+
+  ## Examples
+
+      <.base variant="success">Completed</.base>
+
+      <.base variant="warning" class="ml-2">Pending</.base>
+
+  ## Options
+
+  * `:variant` - Color variant: "success", "warning", "danger", "info", "purple", "pink", "indigo", or "default" (gray)
+  * `:class` - Additional CSS classes (optional)
+  * `:icon` - HTML string for an icon to display before text (optional)
+  """
   def base(assigns) do
+    assigns = assign_new(assigns, :class, fn -> "" end)
+
     ~H"""
-    <span class={"inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium #{get_color_classes(@variant)} #{Map.get(assigns, :class, "")}"}>
+    <span class={"inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium #{get_color_classes(@variant)} #{@class}"}>
       <%= if Map.get(assigns, :icon, nil) do %>
-        <span class="mr-1.5 -ml-0.5 flex-shrink-0"><%= Map.get(assigns, :icon) %></span>
+        <span class="mr-1.5 -ml-0.5 flex-shrink-0"><%= @icon %></span>
       <% end %>
       <%= render_slot(@inner_block) %>
     </span>
@@ -26,9 +51,25 @@ defmodule PineUi.Badge do
     end
   end
 
+  @doc """
+  Renders a badge with a status dot.
+
+  ## Examples
+
+      <.dot variant="success">Active</.dot>
+
+      <.dot variant="danger" class="ml-2">Offline</.dot>
+
+  ## Options
+
+  * `:variant` - Color variant: "success", "warning", "danger", "info", "purple", "pink", "indigo", or "default" (gray)
+  * `:class` - Additional CSS classes (optional)
+  """
   def dot(assigns) do
+    assigns = assign_new(assigns, :class, fn -> "" end)
+
     ~H"""
-    <span class={"inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium #{get_color_classes(@variant)} #{Map.get(assigns, :class, "")}"}>
+    <span class={"inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium #{get_color_classes(@variant)} #{@class}"}>
       <svg class={"mr-1.5 h-2 w-2 flex-shrink-0 #{get_dot_color(@variant)}"} fill="currentColor" viewBox="0 0 8 8">
         <circle cx="4" cy="4" r="3" />
       </svg>
@@ -50,7 +91,23 @@ defmodule PineUi.Badge do
     end
   end
 
+  @doc """
+  Renders a dismissible badge.
+
+  ## Examples
+
+      <.dismissible variant="info">New Feature</.dismissible>
+
+      <.dismissible variant="purple" class="ml-2">Beta</.dismissible>
+
+  ## Options
+
+  * `:variant` - Color variant: "success", "warning", "danger", "info", "purple", "pink", "indigo", or "default" (gray)
+  * `:class` - Additional CSS classes (optional)
+  """
   def dismissible(assigns) do
+    assigns = assign_new(assigns, :class, fn -> "" end)
+
     ~H"""
     <span
       x-data="{ show: true }"
@@ -58,7 +115,7 @@ defmodule PineUi.Badge do
       x-transition:leave="transition ease-in duration-100"
       x-transition:leave-start="opacity-100"
       x-transition:leave-end="opacity-0"
-      class={"inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium #{get_color_classes(@variant)} #{Map.get(assigns, :class, "")}"}>
+      class={"inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium #{get_color_classes(@variant)} #{@class}"}>
       <%= render_slot(@inner_block) %>
       <button
         type="button"

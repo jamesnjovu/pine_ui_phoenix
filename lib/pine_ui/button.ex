@@ -1,44 +1,83 @@
 defmodule PineUi.Button do
   @moduledoc """
-  Provides card components for organizing content with various behaviors.
+  Provides button components with various styles and states.
 
-  The Card module offers three main variants:
-
-  - `basic/1` - Simple card with title, subtitle, content area, and optional footer
-  - `interactive/1` - Card with hover animation effects
-  - `collapsible/1` - Expandable/collapsible card with toggle functionality
+  The Button module offers primary, secondary, and danger button variants
+  with support for loading states, icons, and Phoenix LiveView integration.
 
   ## Examples
 
-      <PineUi.card title="User Profile" subtitle="Personal information">
-        <p>Card content here</p>
-      </PineUi.card>
+      <PineUi.button_primary>
+        Submit
+      </PineUi.button_primary>
 
-      <PineUi.card_interactive>
-        <p>This card has hover effects</p>
-      </PineUi.card_interactive>
+      <PineUi.button_secondary loading={@saving} phx_click="cancel">
+        Cancel
+      </PineUi.button_secondary>
 
-      <PineUi.card_collapsible title="Click to expand" open={false}>
-        <p>This content can be hidden</p>
-      </PineUi.card_collapsible>
+      <PineUi.button_danger disabled={@cannot_delete} phx_click="delete" phx_value_id={@id}>
+        Delete
+      </PineUi.button_danger>
 
-  ## Styling
+  ## Accessibility
 
-  Cards use TailwindCSS for styling and can be customized using the `class` parameter.
+  All button components provide proper focus states, ARIA attributes, and
+  keyboard interaction support.
+  """
+  use Phoenix.Component
+  import Phoenix.HTML  # This is needed for HTML markup
+  import Phoenix.HTML.Form  # This is needed for form elements
+
+  @doc """
+  Renders a primary button component with optional loading state.
+
+  ## Examples
+
+      <.primary>Submit</.primary>
+
+      <.primary loading={true} phx_click="save" disabled={@form_invalid}>
+        Save Changes
+      </.primary>
+
+      <.primary icon="<svg>...</svg>">
+        With Icon
+      </.primary>
+
+  ## Options
+
+  * `:type` - Button type attribute (optional, defaults to "button")
+  * `:class` - Additional CSS classes (optional)
+  * `:disabled` - Whether the button is disabled (optional, defaults to false)
+  * `:loading` - Whether to show loading state (optional, defaults to false)
+  * `:icon` - HTML string for an icon to display before text (optional)
+  * `:phx_click` - The LiveView click event to trigger (optional)
+  * `:phx_value_id` - The id value to pass with the event (optional)
+  * `:phx_target` - The LiveView target for the event (optional)
   """
   def primary(assigns) do
+    assigns =
+      assigns
+      |> assign_new(:type, fn -> "button" end)
+      |> assign_new(:class, fn -> "" end)
+      |> assign_new(:disabled, fn -> false end)
+      |> assign_new(:loading, fn -> false end)
+      |> assign_new(:phx_click, fn -> nil end)
+      |> assign_new(:phx_value_id, fn -> nil end)
+      |> assign_new(:phx_target, fn -> nil end)
+      |> assign_new(:icon, fn -> nil end)
+
     ~H"""
     <button
-      type={Map.get(assigns, :type, "button")}
-      class={"inline-flex items-center justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 #{Map.get(assigns, :class, "")}"}
-      disabled={Map.get(assigns, :disabled, false)}
-      phx-click={Map.get(assigns, :phx_click, nil)}
-      phx-value-id={Map.get(assigns, :phx_value_id, nil)}
-      phx-target={Map.get(assigns, :phx_target, nil)}
-      x-data={if Map.get(assigns, :loading, false), do: "{ loading: true }", else: "{ loading: false }"}
+      type={@type}
+      class={"inline-flex items-center justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 #{@class}"}
+      disabled={@disabled}
+      phx-click={@phx_click}
+      phx-value-id={@phx_value_id}
+      phx-target={@phx_target}
+      x-data={if @loading, do: "{ loading: true }", else: "{ loading: false }"}
     >
-      <%= if Map.get(assigns, :icon, nil) do %>
-        <span class="mr-2"><%= Map.get(assigns, :icon) %></span>
+      <%= if @icon do %>
+        <span class="mr-2"><%= @icon %></span>
       <% end %>
 
       <span x-show="!loading">
@@ -81,18 +120,29 @@ defmodule PineUi.Button do
   * `:phx_target` - The LiveView target for the event (optional)
   """
   def secondary(assigns) do
+    assigns =
+      assigns
+      |> assign_new(:type, fn -> "button" end)
+      |> assign_new(:class, fn -> "" end)
+      |> assign_new(:disabled, fn -> false end)
+      |> assign_new(:loading, fn -> false end)
+      |> assign_new(:phx_click, fn -> nil end)
+      |> assign_new(:phx_value_id, fn -> nil end)
+      |> assign_new(:phx_target, fn -> nil end)
+      |> assign_new(:icon, fn -> nil end)
+
     ~H"""
     <button
-      type={Map.get(assigns, :type, "button")}
-      class={"inline-flex items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 #{Map.get(assigns, :class, "")}"}
-      disabled={Map.get(assigns, :disabled, false)}
-      phx-click={Map.get(assigns, :phx_click, nil)}
-      phx-value-id={Map.get(assigns, :phx_value_id, nil)}
-      phx-target={Map.get(assigns, :phx_target, nil)}
-      x-data={if Map.get(assigns, :loading, false), do: "{ loading: true }", else: "{ loading: false }"}
+      type={@type}
+      class={"inline-flex items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 #{@class}"}
+      disabled={@disabled}
+      phx-click={@phx_click}
+      phx-value-id={@phx_value_id}
+      phx-target={@phx_target}
+      x-data={if @loading, do: "{ loading: true }", else: "{ loading: false }"}
     >
-      <%= if Map.get(assigns, :icon, nil) do %>
-        <span class="mr-2"><%= Map.get(assigns, :icon) %></span>
+      <%= if @icon do %>
+        <span class="mr-2"><%= @icon %></span>
       <% end %>
 
       <span x-show="!loading">
@@ -135,18 +185,29 @@ defmodule PineUi.Button do
   * `:phx_target` - The LiveView target for the event (optional)
   """
   def danger(assigns) do
+    assigns =
+      assigns
+      |> assign_new(:type, fn -> "button" end)
+      |> assign_new(:class, fn -> "" end)
+      |> assign_new(:disabled, fn -> false end)
+      |> assign_new(:loading, fn -> false end)
+      |> assign_new(:phx_click, fn -> nil end)
+      |> assign_new(:phx_value_id, fn -> nil end)
+      |> assign_new(:phx_target, fn -> nil end)
+      |> assign_new(:icon, fn -> nil end)
+
     ~H"""
     <button
-      type={Map.get(assigns, :type, "button")}
-      class={"inline-flex items-center justify-center rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 #{Map.get(assigns, :class, "")}"}
-      disabled={Map.get(assigns, :disabled, false)}
-      phx-click={Map.get(assigns, :phx_click, nil)}
-      phx-value-id={Map.get(assigns, :phx_value_id, nil)}
-      phx-target={Map.get(assigns, :phx_target, nil)}
-      x-data={if Map.get(assigns, :loading, false), do: "{ loading: true }", else: "{ loading: false }"}
+      type={@type}
+      class={"inline-flex items-center justify-center rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 #{@class}"}
+      disabled={@disabled}
+      phx-click={@phx_click}
+      phx-value-id={@phx_value_id}
+      phx-target={@phx_target}
+      x-data={if @loading, do: "{ loading: true }", else: "{ loading: false }"}
     >
-      <%= if Map.get(assigns, :icon, nil) do %>
-        <span class="mr-2"><%= Map.get(assigns, :icon) %></span>
+      <%= if @icon do %>
+        <span class="mr-2"><%= @icon %></span>
       <% end %>
 
       <span x-show="!loading">

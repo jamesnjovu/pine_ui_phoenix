@@ -27,6 +27,7 @@ defmodule PineUi.Card do
   Cards use TailwindCSS for styling and can be customized using the `class` parameter.
   """
   use Phoenix.Component
+  import Phoenix.HTML
 
   @doc """
   Renders a basic card component.
@@ -50,8 +51,13 @@ defmodule PineUi.Card do
   * `:class` - Additional CSS classes for the card container (optional)
   """
   def basic(assigns) do
+    assigns =
+      assigns
+      |> assign_new(:class, fn -> "" end)
+      |> assign_new(:padded, fn -> true end)
+
     ~H"""
-    <div class={"overflow-hidden bg-white shadow rounded-lg #{Map.get(assigns, :class, "")}"}>
+    <div class={"overflow-hidden bg-white shadow rounded-lg #{@class}"}>
       <%= if Map.get(assigns, :title, nil) || Map.get(assigns, :subtitle, nil) do %>
         <div class="px-4 py-5 sm:px-6">
           <%= if Map.get(assigns, :title, nil) do %>
@@ -62,7 +68,7 @@ defmodule PineUi.Card do
           <% end %>
         </div>
       <% end %>
-      <div class={get_body_padding(Map.get(assigns, :padded, true))}>
+      <div class={get_body_padding(@padded)}>
         <%= render_slot(@inner_block) %>
       </div>
       <%= if Map.get(assigns, :footer, nil) do %>
@@ -102,9 +108,14 @@ defmodule PineUi.Card do
   * `:class` - Additional CSS classes for the card container (optional)
   """
   def interactive(assigns) do
+    assigns =
+      assigns
+      |> assign_new(:class, fn -> "" end)
+      |> assign_new(:padded, fn -> true end)
+
     ~H"""
     <div
-      class={"overflow-hidden bg-white shadow rounded-lg transition-all duration-200 ease-in-out #{Map.get(assigns, :class, "")}"}
+      class={"overflow-hidden bg-white shadow rounded-lg transition-all duration-200 ease-in-out #{@class}"}
       x-data="{ hovered: false }"
       x-on:mouseenter="hovered = true"
       x-on:mouseleave="hovered = false"
@@ -120,7 +131,7 @@ defmodule PineUi.Card do
           <% end %>
         </div>
       <% end %>
-      <div class={get_body_padding(Map.get(assigns, :padded, true))}>
+      <div class={get_body_padding(@padded)}>
         <%= render_slot(@inner_block) %>
       </div>
       <%= if Map.get(assigns, :footer, nil) do %>
@@ -158,10 +169,16 @@ defmodule PineUi.Card do
   * `:class` - Additional CSS classes for the card container (optional)
   """
   def collapsible(assigns) do
+    assigns =
+      assigns
+      |> assign_new(:class, fn -> "" end)
+      |> assign_new(:padded, fn -> true end)
+      |> assign_new(:open, fn -> false end)
+
     ~H"""
     <div
-      class={"overflow-hidden bg-white shadow rounded-lg #{Map.get(assigns, :class, "")}"}
-      x-data="{ open: #{Map.get(assigns, :open, "false")} }"
+      class={"overflow-hidden bg-white shadow rounded-lg #{@class}"}
+      x-data="{ open: #{@open} }"
     >
       <div
         class="px-4 py-5 sm:px-6 flex justify-between items-center cursor-pointer"
@@ -191,7 +208,7 @@ defmodule PineUi.Card do
         x-show="open"
         x-collapse
         x-cloak
-        class={get_body_padding(Map.get(assigns, :padded, true))}
+        class={get_body_padding(@padded)}
       >
         <%= render_slot(@inner_block) %>
       </div>

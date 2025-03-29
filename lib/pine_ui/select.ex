@@ -1,26 +1,71 @@
 defmodule PineUi.Select do
-  @moduledoc false
+  @moduledoc """
+  Provides select components for dropdown selections.
+
+  The Select module offers three main variants:
+  - `basic/1` - Standard select dropdown
+  - `grouped/1` - Select with option groups
+  - `searchable/1` - Enhanced select with search functionality
+  """
   use Phoenix.Component
 
+  @doc """
+  Renders a basic select dropdown component.
+
+  ## Examples
+
+      <.basic
+        id="country"
+        label="Country"
+        options={[{"us", "United States"}, {"ca", "Canada"}]}
+        selected="us"
+      />
+
+  ## Options
+
+  * `:id` - The ID for the select element (required)
+  * `:name` - The name attribute (optional, defaults to ID)
+  * `:label` - Label text (optional)
+  * `:options` - List of {value, label} tuples for the options (required)
+  * `:selected` - The currently selected value (optional)
+  * `:placeholder` - Placeholder text for empty selection (optional)
+  * `:hint` - Help text displayed below the select (optional)
+  * `:error` - Error message displayed below the select (optional)
+  * `:required` - Whether the field is required (optional, defaults to false)
+  * `:disabled` - Whether the field is disabled (optional, defaults to false)
+  * `:phx_change` - Phoenix change event name (optional)
+  * `:class` - Additional CSS classes for the select element (optional)
+  * `:container_class` - CSS classes for the container div (optional)
+  """
   def basic(assigns) do
+    assigns =
+      assigns
+      |> assign_new(:container_class, fn -> "" end)
+      |> assign_new(:class, fn -> "" end)
+      |> assign_new(:name, fn -> assigns.id end)
+      |> assign_new(:required, fn -> false end)
+      |> assign_new(:disabled, fn -> false end)
+      |> assign_new(:phx_change, fn -> nil end)
+      |> assign_new(:selected, fn -> nil end)
+
     ~H"""
-    <div class={Map.get(assigns, :container_class, "")}>
+    <div class={@container_class}>
       <%= if Map.get(assigns, :label, nil) do %>
         <label for={@id} class="block text-sm font-medium text-gray-700 mb-1"><%= @label %></label>
       <% end %>
       <select
         id={@id}
-        name={Map.get(assigns, :name, @id)}
-        class={"block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm #{Map.get(assigns, :class, "")}"}
-        phx-change={Map.get(assigns, :phx_change, nil)}
-        required={Map.get(assigns, :required, false)}
-        disabled={Map.get(assigns, :disabled, false)}
+        name={@name}
+        class={"block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm #{@class}"}
+        phx-change={@phx_change}
+        required={@required}
+        disabled={@disabled}
       >
         <%= if Map.get(assigns, :placeholder, nil) do %>
           <option value=""><%= @placeholder %></option>
         <% end %>
         <%= for {value, label} <- @options do %>
-          <option value={value} selected={value == Map.get(assigns, :selected, nil)}><%= label %></option>
+          <option value={value} selected={value == @selected}><%= label %></option>
         <% end %>
       </select>
       <%= if Map.get(assigns, :hint, nil) do %>
@@ -33,19 +78,59 @@ defmodule PineUi.Select do
     """
   end
 
+  @doc """
+  Renders a select dropdown with option groups.
+
+  ## Examples
+
+      <.grouped
+        id="continent"
+        label="Country"
+        option_groups={[
+          {"North America", [{"us", "United States"}, {"ca", "Canada"}]},
+          {"Europe", [{"fr", "France"}, {"de", "Germany"}]}
+        ]}
+      />
+
+  ## Options
+
+  * `:id` - The ID for the select element (required)
+  * `:name` - The name attribute (optional, defaults to ID)
+  * `:label` - Label text (optional)
+  * `:option_groups` - List of {group_label, options} tuples (required)
+  * `:selected` - The currently selected value (optional)
+  * `:placeholder` - Placeholder text for empty selection (optional)
+  * `:hint` - Help text displayed below the select (optional)
+  * `:error` - Error message displayed below the select (optional)
+  * `:required` - Whether the field is required (optional, defaults to false)
+  * `:disabled` - Whether the field is disabled (optional, defaults to false)
+  * `:phx_change` - Phoenix change event name (optional)
+  * `:class` - Additional CSS classes for the select element (optional)
+  * `:container_class` - CSS classes for the container div (optional)
+  """
   def grouped(assigns) do
+    assigns =
+      assigns
+      |> assign_new(:container_class, fn -> "" end)
+      |> assign_new(:class, fn -> "" end)
+      |> assign_new(:name, fn -> assigns.id end)
+      |> assign_new(:required, fn -> false end)
+      |> assign_new(:disabled, fn -> false end)
+      |> assign_new(:phx_change, fn -> nil end)
+      |> assign_new(:selected, fn -> nil end)
+
     ~H"""
-    <div class={Map.get(assigns, :container_class, "")}>
+    <div class={@container_class}>
       <%= if Map.get(assigns, :label, nil) do %>
         <label for={@id} class="block text-sm font-medium text-gray-700 mb-1"><%= @label %></label>
       <% end %>
       <select
         id={@id}
-        name={Map.get(assigns, :name, @id)}
-        class={"block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm #{Map.get(assigns, :class, "")}"}
-        phx-change={Map.get(assigns, :phx_change, nil)}
-        required={Map.get(assigns, :required, false)}
-        disabled={Map.get(assigns, :disabled, false)}
+        name={@name}
+        class={"block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm #{@class}"}
+        phx-change={@phx_change}
+        required={@required}
+        disabled={@disabled}
       >
         <%= if Map.get(assigns, :placeholder, nil) do %>
           <option value=""><%= @placeholder %></option>
@@ -53,7 +138,7 @@ defmodule PineUi.Select do
         <%= for {group_label, options} <- @option_groups do %>
           <optgroup label={group_label}>
             <%= for {value, label} <- options do %>
-              <option value={value} selected={value == Map.get(assigns, :selected, nil)}><%= label %></option>
+              <option value={value} selected={value == @selected}><%= label %></option>
             <% end %>
           </optgroup>
         <% end %>
@@ -68,14 +153,57 @@ defmodule PineUi.Select do
     """
   end
 
+  @doc """
+  Renders a searchable select dropdown with filtering.
+
+  ## Examples
+
+      <.searchable
+        id="country"
+        label="Country"
+        options={[{"us", "United States"}, {"ca", "Canada"}]}
+        placeholder="Search..."
+      />
+
+  ## Options
+
+  * `:id` - The ID for the select element (required)
+  * `:name` - The name attribute (optional, defaults to ID)
+  * `:label` - Label text (optional)
+  * `:options` - List of {value, label} tuples for the options (required)
+  * `:selected` - The currently selected value (optional)
+  * `:selected_label` - The label for the selected value (optional)
+  * `:placeholder` - Placeholder text for the search (optional)
+  * `:hint` - Help text displayed below the select (optional)
+  * `:error` - Error message displayed below the select (optional)
+  * `:required` - Whether the field is required (optional, defaults to false)
+  * `:disabled` - Whether the field is disabled (optional, defaults to false)
+  * `:phx_change` - Phoenix change event name (optional)
+  * `:class` - Additional CSS classes for the select element (optional)
+  * `:container_class` - CSS classes for the container div (optional)
+  """
   def searchable(assigns) do
+    assigns =
+      assigns
+      |> assign_new(:container_class, fn -> "" end)
+      |> assign_new(:class, fn -> "" end)
+      |> assign_new(:name, fn -> assigns.id end)
+      |> assign_new(:placeholder, fn -> "Select an option" end)
+      |> assign_new(:required, fn -> false end)
+      |> assign_new(:disabled, fn -> false end)
+      |> assign_new(:phx_change, fn -> nil end)
+      |> assign_new(:selected, fn -> nil end)
+      |> assign_new(:selected_label, fn -> nil end)
+
+    options_json = Jason.encode!(Enum.map(assigns.options, fn {value, label} -> %{value: value, label: label} end))
+
     ~H"""
     <div
-      x-data="{
+      x-data={"{
         open: false,
-        search: '',
-        selected: #{if Map.get(assigns, :selected_label), do: "'#{@selected_label}'", else: "''"},
-        selectedValue: #{if Map.get(assigns, :selected), do: "'#{@selected}'", else: "''"},
+        search: '#{Map.get(assigns, :selected_label, "")}',
+        selected: '#{Map.get(assigns, :selected_label, "")}',
+        selectedValue: '#{Map.get(assigns, :selected, "")}',
         highlight: -1,
         highlightOption(index) {
           this.highlight = index;
@@ -92,7 +220,7 @@ defmodule PineUi.Select do
           this.$refs.select.dispatchEvent(event);
         },
         filteredOptions() {
-          return #{Jason.encode!(Enum.map(@options, fn {value, label} -> %{value: value, label: label} end))}
+          return #{options_json}
             .filter(option => option.label.toLowerCase().includes(this.search.toLowerCase()));
         },
         onEscape() {
@@ -114,7 +242,7 @@ defmodule PineUi.Select do
             this.selectOption(option.value, option.label);
           }
         }
-      }"
+      }"}
       x-init="() => {
         $watch('search', () => {
           highlight = -1;
@@ -124,7 +252,7 @@ defmodule PineUi.Select do
           }
         });
       }"
-      class={Map.get(assigns, :container_class, "")}
+      class={@container_class}
     >
       <%= if Map.get(assigns, :label, nil) do %>
         <label for={@id} class="block text-sm font-medium text-gray-700 mb-1"><%= @label %></label>
@@ -134,7 +262,7 @@ defmodule PineUi.Select do
         <input
           type="text"
           id={@id <> "_search"}
-          placeholder={Map.get(assigns, :placeholder, "Select an option")}
+          placeholder={@placeholder}
           x-model="search"
           x-on:focus="open = true"
           x-on:click="open = true"
@@ -142,18 +270,18 @@ defmodule PineUi.Select do
           x-on:keydown.arrow-up.prevent="onArrowUp()"
           x-on:keydown.arrow-down.prevent="onArrowDown()"
           x-on:keydown.enter.prevent="onEnter()"
-          class={"block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm #{Map.get(assigns, :class, "")}"}
-          required={Map.get(assigns, :required, false)}
-          disabled={Map.get(assigns, :disabled, false)}
+          class={"block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm #{@class}"}
+          required={@required}
+          disabled={@disabled}
         />
 
         <input
           type="hidden"
           id={@id}
-          name={Map.get(assigns, :name, @id)}
+          name={@name}
           x-ref="select"
           x-model="selectedValue"
-          phx-change={Map.get(assigns, :phx_change, nil)}
+          phx-change={@phx_change}
         />
 
         <div
@@ -166,7 +294,7 @@ defmodule PineUi.Select do
             <div class="px-4 py-2 text-sm text-gray-500">No results found</div>
           </template>
 
-          <template x-for="(option, index) in filteredOptions()" :key="option.value">
+          <template x-for="(option, index) in filteredOptions()" x-bind:key="option.value">
             <div
               x-text="option.label"
               x-on:click="selectOption(option.value, option.label)"
