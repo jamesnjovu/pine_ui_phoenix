@@ -70,9 +70,11 @@ defmodule PineUi.MixProject do
           PineUi.Button,
           PineUi.Dropdown,
           PineUi.Modal,
+          PineUi.Pagination,
           PineUi.Progress,
           PineUi.Switch,
           PineUi.Tabs,
+          PineUi.Toast,
           PineUi.Tooltip
         ],
         "Layout Components": [
@@ -97,7 +99,9 @@ defmodule PineUi.MixProject do
         "Dropdown Components": &(&1[:type] == :dropdown),
         "Tab Components": &(&1[:type] == :tabs),
         "Switch Components": &(&1[:type] == :switch),
-        "Progress Components": &(&1[:type] == :progress)
+        "Progress Components": &(&1[:type] == :progress),
+        "Pagination Components": &(&1[:type] == :pagination),
+        "Toast Components": &(&1[:type] == :toast)
       ],
       source_ref: "v#{@version}",
       source_url: @source_url,

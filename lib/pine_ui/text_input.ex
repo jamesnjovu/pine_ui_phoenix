@@ -138,9 +138,9 @@ defmodule PineUi.TextInput do
 
     error_classes =
       if Map.get(assigns, :error, nil),
-        do:
-          "border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red-500",
-        else: ""
+         do:
+           "border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red-500",
+         else: ""
 
     prefix_classes = if Map.get(assigns, :prefix, nil), do: "pl-9", else: ""
     suffix_classes = if Map.get(assigns, :suffix, nil), do: "pr-9", else: ""

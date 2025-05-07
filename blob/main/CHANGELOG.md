@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Switch components: `switch`, `switch_labeled`, `switch_card`
   - Dropdown components: `dropdown`, `dropdown_with_icons`,`context_menu`
     - Progress components: `progress_bar`, `progress_circle`, `progress_steps`
+  - Pagination components: `pagination`, `pagination_simple`, `pagination_load_more`
+  - Toast components: `toast_container`, `toast`, `toast_trigger`
 
 - Improved documentation and component grouping in ExDoc
 

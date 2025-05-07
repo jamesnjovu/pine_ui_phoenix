@@ -118,11 +118,14 @@ defmodule PineUi do
     Card,
     Dropdown,
     Modal,
+    Pagination,
+    Progress,
     Select,
     Switch,
     Tabs,
     Text,
     TextInput,
+    Toast,
     Tooltip
     }
 
@@ -1370,4 +1373,195 @@ defmodule PineUi do
   def progress_steps(assigns) do
     Progress.steps(assigns)
   end
+  @doc """
+  Renders a pagination component.
+
+  This component creates a pagination interface with page numbers and
+  navigation controls.
+
+  ## Examples
+
+      <.pagination
+        current_page={5}
+        total_pages={10}
+        on_page_change="change_page"
+      />
+
+      <.pagination
+        current_page={3}
+        total_pages={20}
+        sibling_count={2}
+        show_first_last_buttons={true}
+        variant="indigo"
+      />
+
+  ## Options
+
+  * `:current_page` - Current active page (required, 1-based index)
+  * `:total_pages` - Total number of pages (required)
+  * `:sibling_count` - Number of sibling pages to show on each side of current page (optional, defaults to 1)
+  * `:show_first_last_buttons` - Whether to show first/last page buttons (optional, defaults to false)
+  * `:show_ellipsis` - Whether to show ellipsis for hidden pages (optional, defaults to true)
+  * `:variant` - Color variant: "indigo", "blue", "green", "red", "amber" (optional, defaults to "indigo")
+  * `:size` - Size of the pagination: "sm", "md", "lg" (optional, defaults to "md")
+  * `:class` - Additional CSS classes for the pagination container (optional)
+  * `:item_class` - CSS classes for the page items (optional)
+  * `:on_page_change` - Event name or function for page change (optional)
+  """
+  def pagination(assigns) do
+    Pagination.basic(assigns)
+  end
+
+  @doc """
+  Renders a simple pagination component with prev/next buttons.
+
+  This component creates a simpler pagination interface with just the
+  essential navigation controls.
+
+  ## Examples
+
+      <.pagination_simple
+        current_page={5}
+        total_pages={10}
+        on_page_change="change_page"
+      />
+
+  ## Options
+
+  * `:current_page` - Current active page (required, 1-based index)
+  * `:total_pages` - Total number of pages (required)
+  * `:show_page_info` - Whether to show current/total page info (optional, defaults to true)
+  * `:variant` - Color variant: "indigo", "blue", "green", "red", "amber" (optional, defaults to "indigo")
+  * `:size` - Size of the pagination: "sm", "md", "lg" (optional, defaults to "md")
+  * `:class` - Additional CSS classes for the pagination container (optional)
+  * `:on_page_change` - Event name or function for page change (optional)
+  """
+  def pagination_simple(assigns) do
+    Pagination.simple(assigns)
+  end
+
+  @doc """
+  Renders a "load more" pagination component.
+
+  This component creates a button that loads additional content
+  rather than using traditional pagination.
+
+  ## Examples
+
+      <.pagination_load_more
+        current_page={2}
+        total_pages={5}
+        label="Load more results"
+        on_load_more="load_more"
+      />
+
+  ## Options
+
+  * `:current_page` - Current active page (required, 1-based index)
+  * `:total_pages` - Total number of pages (required)
+  * `:label` - Text for the load more button (optional, defaults to "Load more")
+  * `:loading_label` - Text shown when loading (optional, defaults to "Loading...")
+  * `:show_progress` - Whether to show loading progress (optional, defaults to false)
+  * `:show_remaining` - Whether to show count of remaining items (optional, defaults to false)
+  * `:items_per_page` - Number of items loaded per page (optional, required if show_remaining is true)
+  * `:total_items` - Total number of items (optional, required if show_remaining is true)
+  * `:loading` - Whether loading is in progress (optional, defaults to false)
+  * `:variant` - Color variant: "indigo", "blue", "green", "red", "amber" (optional, defaults to "indigo")
+  * `:class` - Additional CSS classes for the container (optional)
+  * `:button_class` - CSS classes for the button (optional)
+  * `:on_load_more` - Event name or function for loading more (optional)
+  """
+  def pagination_load_more(assigns) do
+    Pagination.load_more(assigns)
+  end
+
+  @doc """
+  Renders a toast notification container.
+
+  This component creates a container for toast notifications. It's designed to be
+  placed at the root of your application layout.
+
+  ## Examples
+
+      <.toast_container />
+
+      <.toast_container
+        position="bottom-right"
+        transition="slide"
+      />
+
+  ## Options
+
+  * `:position` - Position of the toasts: "top-right", "top-left", "bottom-right", "bottom-left", "top-center", "bottom-center" (optional, defaults to "top-right")
+  * `:transition` - Animation style: "fade", "slide", "zoom" (optional, defaults to "fade")
+  * `:max_toasts` - Maximum number of toasts to show at once (optional, defaults to 5)
+  * `:class` - Additional CSS classes for the container (optional)
+  """
+  def toast_container(assigns) do
+    Toast.container(assigns)
+  end
+
+  @doc """
+  Renders a standalone toast notification.
+
+  This component creates a single toast notification that can be shown directly
+  in the UI (not via the notification system).
+
+  ## Examples
+
+      <.toast
+        type="success"
+        title="Success!"
+        message="Your changes have been saved."
+      />
+
+      <.toast
+        type="error"
+        message="Failed to save changes."
+        dismissable={true}
+      />
+
+  ## Options
+
+  * `:type` - Toast type: "default", "success", "error", "warning", "info" (optional, defaults to "default")
+  * `:title` - Toast title text (optional)
+  * `:message` - Toast message text (required)
+  * `:icon` - HTML string for custom icon (optional, for default type only)
+  * `:dismissable` - Whether the toast can be dismissed (optional, defaults to false)
+  * `:class` - Additional CSS classes for the toast (optional)
+  """
+  def toast(assigns) do
+    Toast.toast(assigns)
+  end
+
+  @doc """
+  Renders a button that triggers a toast notification.
+
+  This component creates a button that shows a toast notification
+  when clicked.
+
+  ## Examples
+
+      <.toast_trigger
+        label="Show Success Toast"
+        type="success"
+        title="Success!"
+        message="Operation completed successfully."
+      />
+
+  ## Options
+
+  * `:label` - Button text (required)
+  * `:type` - Toast type: "default", "success", "error", "warning", "info" (optional, defaults to "default")
+  * `:title` - Toast title text (optional)
+  * `:message` - Toast message text (required)
+  * `:duration` - Duration in milliseconds before auto-dismiss (optional, defaults to 5000, set to 0 to disable)
+  * `:position` - Position override for the toast (optional)
+  * `:button_class` - CSS classes for the button (optional)
+  * `:button_variant` - Button variant: "primary", "secondary", "outline" (optional, defaults to "primary")
+  """
+  def toast_trigger(assigns) do
+    Toast.trigger(assigns)
+  end
+
 end
