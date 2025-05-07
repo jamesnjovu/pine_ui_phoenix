@@ -1,7 +1,7 @@
 defmodule PineUi.MixProject do
   use Mix.Project
 
-  @version "0.1.1"
+  @version "0.1.3"
   @source_url "https://github.com/jamesnjovu/pine_ui_phoenix"
 
   def project do
@@ -66,7 +66,13 @@ defmodule PineUi.MixProject do
           PineUi.Text
         ],
         "Interactive Components": [
+          PineUi.Accordion,
           PineUi.Button,
+          PineUi.Dropdown,
+          PineUi.Modal,
+          PineUi.Progress,
+          PineUi.Switch,
+          PineUi.Tabs,
           PineUi.Tooltip
         ],
         "Layout Components": [
@@ -85,7 +91,13 @@ defmodule PineUi.MixProject do
         "Buttons": &(&1[:type] == :button),
         "Cards": &(&1[:type] == :card),
         "Form Elements": &(&1[:type] == :form),
-        "Status Elements": &(&1[:type] == :status)
+        "Status Elements": &(&1[:type] == :status),
+        "Accordion Components": &(&1[:type] == :accordion),
+        "Modal Components": &(&1[:type] == :modal),
+        "Dropdown Components": &(&1[:type] == :dropdown),
+        "Tab Components": &(&1[:type] == :tabs),
+        "Switch Components": &(&1[:type] == :switch),
+        "Progress Components": &(&1[:type] == :progress)
       ],
       source_ref: "v#{@version}",
       source_url: @source_url,

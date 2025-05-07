@@ -5,6 +5,20 @@ All notable changes to Pine UI will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3] - 2025-05-07
+
+### Added
+
+- New components:
+  - Accordion components: `accordion_item`, `accordion_group`
+  - Tabs components: `tabs`, `tabs_pills`, `tabs_boxed`
+  - Modal components: `modal`, `modal_full_screen`, `modal_side`
+  - Switch components: `switch`, `switch_labeled`, `switch_card`
+  - Dropdown components: `dropdown`, `dropdown_with_icons`,`context_menu`
+    - Progress components: `progress_bar`, `progress_circle`, `progress_steps`
+
+- Improved documentation and component grouping in ExDoc
+
 ## [0.1.0] - 2023-03-29
 
 ### Added
