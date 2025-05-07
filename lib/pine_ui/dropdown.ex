@@ -129,7 +129,7 @@ defmodule PineUi.Dropdown do
           </div>
         <% end %>
 
-        <%= for divider <- @divider do %>
+        <%= for _divider <- @divider do %>
           <div class="py-1">
             <div class="border-t border-gray-100"></div>
           </div>
@@ -279,7 +279,7 @@ defmodule PineUi.Dropdown do
           </div>
         <% end %>
 
-        <%= for divider <- @divider do %>
+        <%= for _divider <- @divider do %>
           <div class="py-1">
             <div class="border-t border-gray-100"></div>
           </div>
@@ -405,7 +405,7 @@ defmodule PineUi.Dropdown do
           </div>
         <% end %>
 
-        <%= for divider <- @divider do %>
+        <%= for _divider <- @divider do %>
           <div class="py-1">
             <div class="border-t border-gray-100"></div>
           </div>

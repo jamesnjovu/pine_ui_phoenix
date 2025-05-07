@@ -78,9 +78,13 @@ defmodule PineUi.MixProject do
           PineUi.Tooltip
         ],
         "Layout Components": [
-          PineUi.Card
+          PineUi.Card,
+          PineUi.DataTable,
+          PineUi.Gallery
         ],
         "Form Components": [
+          PineUi.DatePicker,
+          PineUi.FileUploader,
           PineUi.TextInput,
           PineUi.Select
         ],
@@ -89,6 +93,7 @@ defmodule PineUi.MixProject do
         ]
       ],
       groups_for_functions: [
+
         "Text & Animation": &(&1[:type] == :text),
         "Buttons": &(&1[:type] == :button),
         "Cards": &(&1[:type] == :card),
@@ -101,7 +106,11 @@ defmodule PineUi.MixProject do
         "Switch Components": &(&1[:type] == :switch),
         "Progress Components": &(&1[:type] == :progress),
         "Pagination Components": &(&1[:type] == :pagination),
-        "Toast Components": &(&1[:type] == :toast)
+        "Toast Components": &(&1[:type] == :toast),
+        "File Uploader Components": &(&1[:type] == :file_uploader),
+        "Gallery Components": &(&1[:type] == :gallery),
+        "Data Table Components": &(&1[:type] == :data_table),
+        "Date Picker Components": &(&1[:type] == :date_picker)
       ],
       source_ref: "v#{@version}",
       source_url: @source_url,

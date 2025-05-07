@@ -42,6 +42,11 @@ defmodule PineUi.Tabs do
     * `:active` - Whether this tab is selected initially (optional, defaults to false)
     * `:disabled` - Whether this tab is disabled (optional, defaults to false)
   """
+  slot :tab, required: true do
+    attr(:title, :string)
+    attr(:active, :string)
+    attr(:disabled, :boolean)
+  end
   def basic(assigns) do
     assigns =
       assigns
@@ -128,6 +133,11 @@ defmodule PineUi.Tabs do
   * `:tab_panel_class` - CSS classes for the tab content panels (optional)
   * `:tab` - Tab slots with the same attributes as in the `basic/1` component
   """
+  slot :tab, required: true do
+    attr(:title, :string)
+    attr(:active, :string)
+    attr(:disabled, :boolean)
+  end
   def pills(assigns) do
     assigns =
       assigns
@@ -157,7 +167,7 @@ defmodule PineUi.Tabs do
             x-bind:tabindex={"activeTab === #{index} ? 0 : -1"}
             x-bind:class={"activeTab === #{index} ? '#{@tab_button_active_class}' : '#{@tab_button_inactive_class}'"}
             class={"#{@tab_button_class}"}
-            {if Map.get(item, :disabled, false), do: [disabled: "true"], else: []}
+            {if Map.get(tab, :disabled, false), do: [disabled: "true"], else: []}
           >
             <%= tab.title %>
           </button>
@@ -239,7 +249,7 @@ defmodule PineUi.Tabs do
             x-bind:tabindex={"activeTab === #{index} ? 0 : -1"}
             x-bind:class={"activeTab === #{index} ? '#{@tab_button_active_class}' : '#{@tab_button_inactive_class}'"}
             class={"#{@tab_button_class}"}
-            {if Map.get(item, :disabled, false), do: [disabled: "true"], else: []}
+            {if Map.get(tab, :disabled, false), do: [disabled: "true"], else: []}
           >
             <%= tab.title %>
           </button>

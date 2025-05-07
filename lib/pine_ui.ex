@@ -116,7 +116,11 @@ defmodule PineUi do
     Badge,
     Button,
     Card,
+    DataTable,
+    DatePicker,
     Dropdown,
+    FileUploader,
+    Gallery,
     Modal,
     Pagination,
     Progress,
@@ -798,7 +802,7 @@ defmodule PineUi do
     assigns =
       assigns
       |> assign_new(:panel_class, fn -> Map.get(assigns, :item_class, "") end)
-      |> update(:panel, fn panel -> Enum.map(assigns[:item] || [], &Map.put(&1, :__slot__, "panel")) end)
+      |> update(:panel, fn _panel -> Enum.map(assigns[:item] || [], &Map.put(&1, :__slot__, "panel")) end)
 
     Accordion.group(assigns)
   end
@@ -1564,4 +1568,412 @@ defmodule PineUi do
     Toast.trigger(assigns)
   end
 
+  @doc """
+  Renders a file uploader component with drag-and-drop functionality.
+
+  This component creates a file upload area that allows users to select files
+  either by clicking or by dragging and dropping them.
+
+  ## Examples
+
+      <.file_uploader
+        id="document-upload"
+        name="document"
+        label="Upload Document"
+        accept=".pdf,.doc,.docx"
+      />
+
+      <.file_uploader
+        id="profile-image"
+        name="profile_image"
+        label="Upload Profile Image"
+        accept="image/*"
+        max_file_size={5 * 1024 * 1024}
+        show_preview={true}
+      />
+
+  ## Options
+
+  * `:id` - The ID for the file input (required)
+  * `:name` - The name attribute for the file input (optional, defaults to ID)
+  * `:label` - Label text for the uploader (optional)
+  * `:accept` - Comma-separated list of allowed file types (optional)
+  * `:max_file_size` - Maximum file size in bytes (optional)
+  * `:multiple` - Whether to allow multiple file selection (optional, defaults to false)
+  * `:show_preview` - Whether to show file previews (optional, defaults to false for multiple files, true for single files)
+  * `:class` - Additional CSS classes for the uploader container (optional)
+  * `:on_change` - JavaScript function to call when files change (optional)
+  """
+  def file_uploader(assigns) do
+    FileUploader.basic(assigns)
+  end
+
+  @doc """
+  Renders an image uploader component with preview and optional cropping.
+
+  This component creates an uploader specifically for images with
+  built-in preview and optional cropping functionality.
+
+  ## Examples
+
+      <.image_uploader
+        id="avatar-upload"
+        name="avatar"
+        label="Upload Avatar"
+      />
+
+      <.image_uploader
+        id="cover-photo"
+        name="cover_photo"
+        label="Cover Photo"
+        aspect_ratio={16/9}
+        allow_cropping={true}
+        preview_height="10rem"
+      />
+
+  ## Options
+
+  * `:id` - The ID for the file input (required)
+  * `:name` - The name attribute for the file input (optional, defaults to ID)
+  * `:label` - Label text for the uploader (optional)
+  * `:accept` - Comma-separated list of allowed image types (optional, defaults to "image/*")
+  * `:max_file_size` - Maximum file size in bytes (optional)
+  * `:aspect_ratio` - Fixed aspect ratio for the image (optional)
+  * `:allow_cropping` - Whether to enable image cropping (optional, defaults to false)
+  * `:preview_height` - Height of the preview area (optional, defaults to "12rem")
+  * `:class` - Additional CSS classes for the uploader container (optional)
+  * `:on_change` - JavaScript function to call when files change (optional)
+  """
+  def image_uploader(assigns) do
+    FileUploader.image(assigns)
+  end
+
+  @doc """
+  Renders a multi-file uploader component with progress tracking.
+
+  This component creates an uploader that handles multiple files with
+  individual progress tracking for each file.
+
+  ## Examples
+
+      <.multi_file_uploader
+        id="gallery-upload"
+        name="gallery"
+        label="Upload Images"
+        accept="image/*"
+        max_files={5}
+      />
+
+  ## Options
+
+  * `:id` - The ID for the file input (required)
+  * `:name` - The name attribute for the file input (optional, defaults to ID)
+  * `:label` - Label text for the uploader (optional)
+  * `:accept` - Comma-separated list of allowed file types (optional)
+  * `:max_file_size` - Maximum file size in bytes (optional)
+  * `:max_files` - Maximum number of files that can be selected (optional)
+  * `:show_preview` - Whether to show file previews (optional, defaults to true)
+  * `:class` - Additional CSS classes for the uploader container (optional)
+  * `:on_change` - JavaScript function to call when files change (optional)
+  """
+  def multi_file_uploader(assigns) do
+    FileUploader.multi(assigns)
+  end
+
+  @doc """
+  Renders a grid gallery component.
+
+  This component creates a responsive grid layout for displaying multiple images.
+
+  ## Examples
+
+      <.image_gallery
+        images={[
+          %{src: "/images/photo1.jpg", alt: "Photo 1"},
+          %{src: "/images/photo2.jpg", alt: "Photo 2"},
+          %{src: "/images/photo3.jpg", alt: "Photo 3"}
+        ]}
+      />
+
+      <.image_gallery
+        images={@photos}
+        columns={3}
+        gap="4"
+        enable_lightbox={true}
+      />
+
+  ## Options
+
+  * `:images` - List of image maps with src and alt keys (required)
+  * `:columns` - Number of columns in the grid: 1, 2, 3, 4, 5, 6 (optional, defaults to 3)
+  * `:gap` - Gap size between grid items: "1", "2", "4", "6", "8" (optional, defaults to "4")
+  * `:aspect_ratio` - Image aspect ratio: "square", "video", "portrait" (optional, defaults to "square")
+  * `:rounded` - Whether to round image corners (optional, defaults to true)
+  * `:enable_lightbox` - Whether to enable lightbox preview (optional, defaults to false)
+  * `:class` - Additional CSS classes for the gallery container (optional)
+  * `:image_class` - CSS classes for the images (optional)
+  """
+  def image_gallery(assigns) do
+    Gallery.grid(assigns)
+  end
+
+  @doc """
+  Renders a masonry gallery component.
+
+  This component creates a masonry layout for displaying images of varying heights.
+
+  ## Examples
+
+      <.image_gallery_masonry
+        images={[
+          %{src: "/images/photo1.jpg", alt: "Photo 1", height: "md"},
+          %{src: "/images/photo2.jpg", alt: "Photo 2", height: "lg"},
+          %{src: "/images/photo3.jpg", alt: "Photo 3", height: "sm"}
+        ]}
+      />
+
+  ## Options
+
+  * `:images` - List of image maps with src, alt, and optional height keys (required)
+  * `:columns` - Number of columns in the layout: 1, 2, 3, 4 (optional, defaults to 3)
+  * `:gap` - Gap size between items: "1", "2", "4", "6", "8" (optional, defaults to "4")
+  * `:rounded` - Whether to round image corners (optional, defaults to true)
+  * `:enable_lightbox` - Whether to enable lightbox preview (optional, defaults to false)
+  * `:class` - Additional CSS classes for the gallery container (optional)
+  * `:image_class` - CSS classes for the images (optional)
+  """
+  def image_gallery_masonry(assigns) do
+    Gallery.masonry(assigns)
+  end
+
+
+  @doc """
+  Renders a carousel gallery component.
+
+  This component creates a slideshow carousel for displaying images.
+
+  ## Examples
+
+      <.image_carousel
+        images={[
+          %{src: "/images/photo1.jpg", alt: "Photo 1"},
+          %{src: "/images/photo2.jpg", alt: "Photo 2"},
+          %{src: "/images/photo3.jpg", alt: "Photo 3"}
+        ]}
+      />
+
+      <.image_carousel
+        images={@photos}
+        autoplay={true}
+        autoplay_speed={3000}
+        show_thumbnails={true}
+      />
+
+  ## Options
+
+  * `:images` - List of image maps with src and alt keys (required)
+  * `:aspect_ratio` - Image aspect ratio: "square", "video", "portrait" (optional, defaults to "video")
+  * `:rounded` - Whether to round image corners (optional, defaults to true)
+  * `:show_indicators` - Whether to show slide indicators (optional, defaults to true)
+  * `:show_arrows` - Whether to show navigation arrows (optional, defaults to true)
+  * `:show_thumbnails` - Whether to show thumbnail navigation (optional, defaults to false)
+  * `:autoplay` - Whether to autoplay the carousel (optional, defaults to false)
+  * `:autoplay_speed` - Autoplay speed in milliseconds (optional, defaults to 5000)
+  * `:class` - Additional CSS classes for the carousel container (optional)
+  * `:image_class` - CSS classes for the images (optional)
+  """
+  def image_carousel(assigns) do
+    Gallery.carousel(assigns)
+  end
+
+  @doc """
+  Renders a data table component.
+
+  This component creates a table for displaying tabular data with
+  optional sorting, filtering, and pagination.
+
+  ## Examples
+
+      <.data_table
+        id="users-table"
+        columns={[
+          %{key: "name", label: "Name", sortable: true},
+          %{key: "email", label: "Email"},
+          %{key: "role", label: "Role", filterable: true}
+        ]}
+        data={@users}
+      />
+
+      <.data_table
+        id="products-table"
+        columns={@columns}
+        data={@products}
+        sortable={true}
+        filterable={true}
+        paginate={true}
+        per_page={10}
+      />
+
+  ## Options
+
+  * `:id` - Unique identifier for the table (required)
+  * `:columns` - List of column configuration maps (required)
+  * `:data` - List of data items to display in the table (required)
+  * `:sortable` - Whether sorting is enabled globally (optional, defaults to false)
+  * `:filterable` - Whether filtering is enabled globally (optional, defaults to false)
+  * `:paginate` - Whether pagination is enabled (optional, defaults to false)
+  * `:per_page` - Number of items per page when pagination is enabled (optional, defaults to 10)
+  * `:selectable` - Whether rows can be selected with checkboxes (optional, defaults to false)
+  * `:class` - Additional CSS classes for the table container (optional)
+  * `:table_class` - CSS classes for the table element (optional)
+  * `:empty_state` - Content to display when there are no rows to show (optional)
+  * `:row_click` - Event name or function to call when a row is clicked (optional)
+  * `:on_selection_change` - Event name or function to call when selection changes (optional)
+  """
+  def data_table(assigns) do
+    DataTable.basic(assigns)
+  end
+
+  @doc """
+  Renders a data table with expandable rows.
+
+  This component creates a table where rows can be expanded to show additional details.
+
+  ## Examples
+
+      <.data_table_expandable
+        id="orders-table"
+        columns={[
+          %{key: "order_id", label: "Order ID"},
+          %{key: "customer", label: "Customer"},
+          %{key: "date", label: "Date"},
+          %{key: "status", label: "Status"}
+        ]}
+        data={@orders}
+      >
+        <:expanded_row :let={row}>
+          <div class="p-4 bg-gray-50">
+            <h3 class="font-medium">Order Details</h3>
+            <p>Items: <%= row.items.length %></p>
+            <p>Total: $<%= row.total %></p>
+          </div>
+        </:expanded_row>
+      </.data_table_expandable>
+
+  ## Options
+
+  * `:id` - Unique identifier for the table (required)
+  * `:columns` - List of column configuration maps (required)
+  * `:data` - List of data items to display in the table (required)
+  * `:sortable` - Whether sorting is enabled globally (optional, defaults to false)
+  * `:filterable` - Whether filtering is enabled globally (optional, defaults to false)
+  * `:paginate` - Whether pagination is enabled (optional, defaults to false)
+  * `:per_page` - Number of items per page when pagination is enabled (optional, defaults to 10)
+  * `:class` - Additional CSS classes for the table container (optional)
+  * `:table_class` - CSS classes for the table element (optional)
+  * `:empty_state` - Content to display when there are no rows to show (optional)
+  * `:expanded_row` - Slot for customizing the expanded row content (required)
+  """
+  def data_table_expandable(assigns) do
+    DataTable.expandable(assigns)
+  end
+
+  @doc """
+  Renders a date picker component.
+
+  This component creates a date picker for selecting a single date.
+
+  ## Examples
+
+      <.date_picker
+        id="event-date"
+        name="event[date]"
+        label="Event Date"
+      />
+
+      <.date_picker
+        id="appointment-date"
+        name="appointment[date]"
+        label="Appointment Date"
+        min="2023-01-01"
+        max="2023-12-31"
+        format="MM/DD/YYYY"
+        value="2023-06-15"
+      />
+
+  ## Options
+
+  * `:id` - The ID for the input element (required)
+  * `:name` - The name attribute for the input (optional, defaults to ID)
+  * `:label` - Label text for the input (optional)
+  * `:value` - Current date value in ISO format (YYYY-MM-DD) (optional)
+  * `:min` - Minimum selectable date in ISO format (optional)
+  * `:max` - Maximum selectable date in ISO format (optional)
+  * `:format` - Date display format: "YYYY-MM-DD", "MM/DD/YYYY", "DD/MM/YYYY" (optional, defaults to "YYYY-MM-DD")
+  * `:placeholder` - Placeholder text when no date is selected (optional)
+  * `:hint` - Help text displayed below the input (optional)
+  * `:error` - Error message displayed below the input (optional)
+  * `:disabled` - Whether the input is disabled (optional, defaults to false)
+  * `:required` - Whether the input is required (optional, defaults to false)
+  * `:class` - Additional CSS classes for the container (optional)
+  * `:input_class` - CSS classes for the input element (optional)
+  * `:calendar_class` - CSS classes for the calendar dropdown (optional)
+  * `:phx_change` - Phoenix change event name (optional)
+  * `:phx_blur` - Phoenix blur event name (optional)
+  """
+  def date_picker(assigns) do
+    DatePicker.basic(assigns)
+  end
+
+  @doc """
+  Renders a date range picker component.
+
+  This component creates a date picker for selecting a start and end date range.
+
+  ## Examples
+
+      <.date_range_picker
+        id="date-range"
+        name_start="start_date"
+        name_end="end_date"
+        label="Date Range"
+      />
+
+      <.date_range_picker
+        id="booking"
+        name_start="booking[start_date]"
+        name_end="booking[end_date]"
+        label="Booking Period"
+        value_start="2023-06-15"
+        value_end="2023-06-30"
+        min="2023-01-01"
+        max="2023-12-31"
+      />
+
+  ## Options
+
+  * `:id` - The ID prefix for the input elements (required)
+  * `:name_start` - The name attribute for the start date input (required)
+  * `:name_end` - The name attribute for the end date input (required)
+  * `:label` - Label text for the input (optional)
+  * `:value_start` - Current start date value in ISO format (optional)
+  * `:value_end` - Current end date value in ISO format (optional)
+  * `:min` - Minimum selectable date in ISO format (optional)
+  * `:max` - Maximum selectable date in ISO format (optional)
+  * `:format` - Date display format: "YYYY-MM-DD", "MM/DD/YYYY", "DD/MM/YYYY" (optional, defaults to "YYYY-MM-DD")
+  * `:placeholder_start` - Placeholder text for start date input (optional)
+  * `:placeholder_end` - Placeholder text for end date input (optional)
+  * `:hint` - Help text displayed below the input (optional)
+  * `:error` - Error message displayed below the input (optional)
+  * `:disabled` - Whether the inputs are disabled (optional, defaults to false)
+  * `:required` - Whether the inputs are required (optional, defaults to false)
+  * `:class` - Additional CSS classes for the container (optional)
+  * `:input_class` - CSS classes for the input elements (optional)
+  * `:calendar_class` - CSS classes for the calendar dropdown (optional)
+  * `:phx_change` - Phoenix change event name (optional)
+  * `:phx_blur` - Phoenix blur event name (optional)
+  """
+  def date_range_picker(assigns) do
+    DatePicker.range(assigns)
+  end
 end

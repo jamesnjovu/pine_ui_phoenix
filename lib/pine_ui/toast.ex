@@ -86,7 +86,7 @@ defmodule PineUi.Toast do
       aria-live="polite"
       aria-atomic="true"
     >
-      <template x-for="toast in toasts" :key="toast.id">
+      <template x-for="toast in toasts" x-bind:key="toast.id">
         <div
           x-show="true"
           x-transition:enter={get_enter_transition(@transition)}
@@ -355,7 +355,7 @@ defmodule PineUi.Toast do
                 <button
                   type="button"
                   class="rounded bg-white px-2 py-1.5 text-xs font-medium text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                  x-on:click="<%= @action[:on_click] %>"
+                  x-on:click={"#{@action[:on_click]}"}
                 >
                   <%= @action[:text] %>
                 </button>
@@ -370,7 +370,7 @@ defmodule PineUi.Toast do
             <button
               type="button"
               class="inline-flex rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              x-on:click="show = false; <%= if @on_dismiss, do: @on_dismiss %>"
+              x-on:click={"show = false; #{if @on_dismiss, do: @on_dismiss}"}
             >
               <span class="sr-only">Close</span>
               <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">

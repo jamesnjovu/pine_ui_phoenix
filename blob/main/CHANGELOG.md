@@ -14,10 +14,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Tabs components: `tabs`, `tabs_pills`, `tabs_boxed`
   - Modal components: `modal`, `modal_full_screen`, `modal_side`
   - Switch components: `switch`, `switch_labeled`, `switch_card`
-  - Dropdown components: `dropdown`, `dropdown_with_icons`,`context_menu`
-    - Progress components: `progress_bar`, `progress_circle`, `progress_steps`
+  - Dropdown components: `dropdown`, `dropdown_with_icons`, `context_menu`
+  - Progress components: `progress_bar`, `progress_circle`, `progress_steps`
   - Pagination components: `pagination`, `pagination_simple`, `pagination_load_more`
   - Toast components: `toast_container`, `toast`, `toast_trigger`
+  - File upload components: `file_uploader`, `image_uploader`, `multi_file_uploader`
+  - Image gallery components: `image_gallery`, `image_gallery_masonry`, `image_carousel`
+  - Data table components: `data_table`, `data_table_expandable`
+  - Date picker components: `date_picker`, `date_range_picker`
 
 - Improved documentation and component grouping in ExDoc
 
