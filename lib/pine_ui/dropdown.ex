@@ -1,4 +1,4 @@
-defmodule PineUi.Dropdown do
+defmodule PineUiPhoenix.Dropdown do
   @moduledoc """
   Provides dropdown menu components for displaying lists of actions or options.
 

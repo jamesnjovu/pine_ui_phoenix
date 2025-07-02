@@ -1,4 +1,4 @@
-defmodule PineUi.Select do
+defmodule PineUiPhoenix.Select do
   @moduledoc """
   Provides select components for dropdown selections.
 

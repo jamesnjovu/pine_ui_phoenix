@@ -1,4 +1,4 @@
-defmodule PineUi.Tabs do
+defmodule PineUiPhoenix.Tabs do
   @moduledoc """
   Provides tabs components for organizing content into selectable panes.
 

@@ -1,4 +1,4 @@
-defmodule PineUi.Switch do
+defmodule PineUiPhoenix.Switch do
   @moduledoc """
   Provides toggle switch components for binary choices.
 

@@ -1,4 +1,4 @@
-defmodule PineUi.Button do
+defmodule PineUiPhoenix.Button do
   @moduledoc """
   Provides button components with various styles and states.
 
@@ -7,17 +7,17 @@ defmodule PineUi.Button do
 
   ## Examples
 
-      <PineUi.button_primary>
+      <PineUiPhoenix.button_primary>
         Submit
-      </PineUi.button_primary>
+      </PineUiPhoenix.button_primary>
 
-      <PineUi.button_secondary loading={@saving} phx_click="cancel">
+      <PineUiPhoenix.button_secondary loading={@saving} phx_click="cancel">
         Cancel
-      </PineUi.button_secondary>
+      </PineUiPhoenix.button_secondary>
 
-      <PineUi.button_danger disabled={@cannot_delete} phx_click="delete" phx_value_id={@id}>
+      <PineUiPhoenix.button_danger disabled={@cannot_delete} phx_click="delete" phx_value_id={@id}>
         Delete
-      </PineUi.button_danger>
+      </PineUiPhoenix.button_danger>
 
   ## Accessibility
 
@@ -25,8 +25,6 @@ defmodule PineUi.Button do
   keyboard interaction support.
   """
   use Phoenix.Component
-  import Phoenix.HTML  # This is needed for HTML markup
-  import Phoenix.HTML.Form  # This is needed for form elements
 
   @doc """
   Renders a primary button component with optional loading state.

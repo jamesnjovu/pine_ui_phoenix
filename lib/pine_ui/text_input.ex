@@ -1,4 +1,4 @@
-defmodule PineUi.TextInput do
+defmodule PineUiPhoenix.TextInput do
   @moduledoc """
   Provides text input components for forms and user input.
 

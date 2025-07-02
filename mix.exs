@@ -1,4 +1,4 @@
-defmodule PineUi.MixProject do
+defmodule PineUiPhoenix.MixProject do
   use Mix.Project
 
   @version "0.1.3"
@@ -6,7 +6,7 @@ defmodule PineUi.MixProject do
 
   def project do
     [
-      app: :pine_ui,
+      app: :pine_ui_phoenix,
       version: @version,
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
@@ -24,15 +24,15 @@ defmodule PineUi.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {PineUi.Application, []}
+      mod: {PineUiPhoenix.Application, []}
     ]
   end
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:phoenix_live_view, "~> 0.20.1"},
-      {:poison, "~> 3.1.0"},
+      {:phoenix_live_view, ">= 0.18.0", optional: true},
+      {:poison, "~> 3.1.0", optional: true},
       {:ex_doc, "~> 0.23", only: :dev, runtime: false},
       {:jason, "~> 1.2", optional: true}
     ]
@@ -55,7 +55,7 @@ defmodule PineUi.MixProject do
 
   defp docs do
     [
-      main: "PineUi",
+      main: "PineUiPhoenix",
 #      logo: "assets/logo.png",
       extras: [
         "README.md": [title: "Overview"],
@@ -63,33 +63,33 @@ defmodule PineUi.MixProject do
       ],
       groups_for_modules: [
         "Text Components": [
-          PineUi.Text
+          PineUiPhoenix.Text
         ],
         "Interactive Components": [
-          PineUi.Accordion,
-          PineUi.Button,
-          PineUi.Dropdown,
-          PineUi.Modal,
-          PineUi.Pagination,
-          PineUi.Progress,
-          PineUi.Switch,
-          PineUi.Tabs,
-          PineUi.Toast,
-          PineUi.Tooltip
+          PineUiPhoenix.Accordion,
+          PineUiPhoenix.Button,
+          PineUiPhoenix.Dropdown,
+          PineUiPhoenix.Modal,
+          PineUiPhoenix.Pagination,
+          PineUiPhoenix.Progress,
+          PineUiPhoenix.Switch,
+          PineUiPhoenix.Tabs,
+          PineUiPhoenix.Toast,
+          PineUiPhoenix.Tooltip
         ],
         "Layout Components": [
-          PineUi.Card,
-          PineUi.DataTable,
-          PineUi.Gallery
+          PineUiPhoenix.Card,
+          PineUiPhoenix.DataTable,
+          PineUiPhoenix.Gallery
         ],
         "Form Components": [
-          PineUi.DatePicker,
-          PineUi.FileUploader,
-          PineUi.TextInput,
-          PineUi.Select
+          PineUiPhoenix.DatePicker,
+          PineUiPhoenix.FileUploader,
+          PineUiPhoenix.TextInput,
+          PineUiPhoenix.Select
         ],
         "Status Components": [
-          PineUi.Badge
+          PineUiPhoenix.Badge
         ]
       ],
       groups_for_functions: [

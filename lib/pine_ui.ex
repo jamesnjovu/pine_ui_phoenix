@@ -1,4 +1,4 @@
-defmodule PineUi do
+defmodule PineUiPhoenix do
   @moduledoc """
   # Pine UI 🌲
 
@@ -58,23 +58,23 @@ defmodule PineUi do
 
   ```heex
   <div class="p-8 space-y-4">
-    <PineUi.text_animation_blow text="Welcome to Pine UI" />
+    <PineUiPhoenix.text_animation_blow text="Welcome to Pine UI" />
 
-    <PineUi.card title="Getting Started">
+    <PineUiPhoenix.card title="Getting Started">
       <p>Pine UI makes it easy to build interactive Phoenix applications.</p>
 
       <div class="mt-4 flex space-x-2">
-        <PineUi.button_primary>
+        <PineUiPhoenix.button_primary>
           Get Started
-        </PineUi.button_primary>
+        </PineUiPhoenix.button_primary>
 
-        <PineUi.button_secondary>
+        <PineUiPhoenix.button_secondary>
           Documentation
-        </PineUi.button_secondary>
+        </PineUiPhoenix.button_secondary>
       </div>
-    </PineUi.card>
+    </PineUiPhoenix.card>
 
-    <PineUi.typing_effect
+    <PineUiPhoenix.typing_effect
       text_list={Poison.encode!(["Easy to use", "Highly customizable", "Interactive components"])}
       class="flex justify-center"
       text_class="text-xl font-medium text-indigo-600"
@@ -111,7 +111,7 @@ defmodule PineUi do
   import Phoenix.HTML
   import Phoenix.HTML.Form
 
-  alias PineUi.{
+  alias PineUiPhoenix.{
     Accordion,
     Badge,
     Button,

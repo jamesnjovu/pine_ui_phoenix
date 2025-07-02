@@ -1,4 +1,4 @@
-defmodule PineUi.Tooltip do
+defmodule PineUiPhoenix.Tooltip do
   @moduledoc false
   use Phoenix.Component
 

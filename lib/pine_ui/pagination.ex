@@ -1,4 +1,4 @@
-defmodule PineUi.Pagination do
+defmodule PineUiPhoenix.Pagination do
   @moduledoc """
   Provides pagination components for navigating through pages of content.
 

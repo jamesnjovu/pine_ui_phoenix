@@ -1,4 +1,4 @@
-defmodule PineUi.Modal do
+defmodule PineUiPhoenix.Modal do
   @moduledoc """
   Provides modal dialog components for displaying content that requires user attention.
 

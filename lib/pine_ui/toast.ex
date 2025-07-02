@@ -1,4 +1,4 @@
-defmodule PineUi.Toast do
+defmodule PineUiPhoenix.Toast do
   @moduledoc """
   Provides toast notification components for displaying temporary messages.
 

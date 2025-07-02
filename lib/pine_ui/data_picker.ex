@@ -1,4 +1,4 @@
-defmodule PineUi.DatePicker do
+defmodule PineUiPhoenix.DatePicker do
   @moduledoc """
   Provides date picker components for selecting dates and date ranges.
 

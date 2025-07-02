@@ -1,4 +1,4 @@
-defmodule PineUi.Accordion do
+defmodule PineUiPhoenix.Accordion do
   @moduledoc """
   Provides accordion components for expandable/collapsible content sections.
 

@@ -1,4 +1,4 @@
-defmodule PineUi.FileUploader do
+defmodule PineUiPhoenix.FileUploader do
   @moduledoc """
   Provides file upload components with drag-and-drop functionality.
 

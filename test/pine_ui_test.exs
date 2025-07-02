@@ -1,8 +1,8 @@
-defmodule PineUiTest do
+defmodule PineUiPhoenixTest do
   use ExUnit.Case
-  doctest PineUi
+  doctest PineUiPhoenix
 
-  test "greets the world" do
-    assert PineUi.hello() == :world
+  test "module exists" do
+    assert Code.ensure_loaded?(PineUiPhoenix)
   end
 end

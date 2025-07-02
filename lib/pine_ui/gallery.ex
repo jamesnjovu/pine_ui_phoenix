@@ -1,4 +1,4 @@
-defmodule PineUi.Gallery do
+defmodule PineUiPhoenix.Gallery do
   @moduledoc """
   Provides image gallery components for displaying collections of images.
 

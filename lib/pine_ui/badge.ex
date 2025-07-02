@@ -1,4 +1,4 @@
-defmodule PineUi.Badge do
+defmodule PineUiPhoenix.Badge do
   @moduledoc """
   Provides badge components for status indicators.
 

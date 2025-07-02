@@ -1,4 +1,4 @@
-defmodule PineUi.Types do
+defmodule PineUiPhoenix.Types do
   @moduledoc """
   Type specifications for Pine UI components.
 

@@ -1,4 +1,4 @@
-defmodule PineUi.Progress do
+defmodule PineUiPhoenix.Progress do
   @moduledoc """
   Provides progress indicator components for displaying completion status.
 

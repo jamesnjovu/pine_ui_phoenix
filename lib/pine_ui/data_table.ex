@@ -1,4 +1,4 @@
-defmodule PineUi.DataTable do
+defmodule PineUiPhoenix.DataTable do
   @moduledoc """
   Provides data table components for displaying tabular data with sorting and filtering.
 

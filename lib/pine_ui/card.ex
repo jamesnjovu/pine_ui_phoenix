@@ -1,4 +1,4 @@
-defmodule PineUi.Card do
+defmodule PineUiPhoenix.Card do
   @moduledoc """
   Provides card components for organizing content with various behaviors.
 

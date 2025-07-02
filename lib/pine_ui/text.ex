@@ -1,4 +1,4 @@
-defmodule PineUi.Text do
+defmodule PineUiPhoenix.Text do
   @moduledoc false
   use Phoenix.Component
 

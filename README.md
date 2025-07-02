@@ -29,23 +29,23 @@ Pine UI provides a collection of Phoenix Components that can be used in your HEE
 
 ```heex
 <div class="p-8 space-y-4">
-  <PineUi.text_animation_blow text="Welcome to Pine UI" />
+  <PineUiPhoenix.text_animation_blow text="Welcome to Pine UI" />
   
-  <PineUi.card title="Getting Started">
+  <PineUiPhoenix.card title="Getting Started">
     <p>Pine UI makes it easy to build interactive Phoenix applications.</p>
     
     <div class="mt-4 flex space-x-2">
-      <PineUi.button_primary>
+      <PineUiPhoenix.button_primary>
         Get Started
-      </PineUi.button_primary>
+      </PineUiPhoenix.button_primary>
       
-      <PineUi.button_secondary>
+      <PineUiPhoenix.button_secondary>
         Documentation
-      </PineUi.button_secondary>
+      </PineUiPhoenix.button_secondary>
     </div>
-  </PineUi.card>
+  </PineUiPhoenix.card>
   
-  <PineUi.typing_effect
+  <PineUiPhoenix.typing_effect
     text_list={Poison.encode!(["Easy to use", "Highly customizable", "Interactive components"])}
     class="flex justify-center"
     text_class="text-xl font-medium text-indigo-600"
@@ -94,66 +94,66 @@ Pine UI provides a collection of Phoenix Components that can be used in your HEE
 ### Text Animation
 
 ```heex
-<PineUi.typing_effect
+<PineUiPhoenix.typing_effect
   text_list={Poison.encode!(["First message", "Second message"])}
   class="flex justify-center py-8"
   text_class="text-2xl font-black text-blue-600"
 />
 
-<PineUi.text_animation_blow text="Scale In Animation" />
+<PineUiPhoenix.text_animation_blow text="Scale In Animation" />
 
-<PineUi.text_animation_fade text="Fade In Animation" />
+<PineUiPhoenix.text_animation_fade text="Fade In Animation" />
 ```
 
 ### Buttons
 
 ```heex
-<PineUi.button_primary phx_click="save">
+<PineUiPhoenix.button_primary phx_click="save">
   Save Changes
-</PineUi.button_primary>
+</PineUiPhoenix.button_primary>
 
-<PineUi.button_secondary loading={@loading}>
+<PineUiPhoenix.button_secondary loading={@loading}>
   Loading Example
-</PineUi.button_secondary>
+</PineUiPhoenix.button_secondary>
 
-<PineUi.button_danger phx_click="delete" phx_value_id={@item.id}>
+<PineUiPhoenix.button_danger phx_click="delete" phx_value_id={@item.id}>
   Delete
-</PineUi.button_danger>
+</PineUiPhoenix.button_danger>
 ```
 
 ### Cards
 
 ```heex
-<PineUi.card title="Basic Card" subtitle="Card description">
+<PineUiPhoenix.card title="Basic Card" subtitle="Card description">
   <p>Content goes here</p>
-</PineUi.card>
+</PineUiPhoenix.card>
 
-<PineUi.card_interactive title="Interactive Card">
+<PineUiPhoenix.card_interactive title="Interactive Card">
   <p>This card has hover effects</p>
-</PineUi.card_interactive>
+</PineUiPhoenix.card_interactive>
 
-<PineUi.card_collapsible title="Collapsible Card" open={true}>
+<PineUiPhoenix.card_collapsible title="Collapsible Card" open={true}>
   <p>This content can be collapsed</p>
-</PineUi.card_collapsible>
+</PineUiPhoenix.card_collapsible>
 ```
 
 ### Form Inputs
 
 ```heex
-<PineUi.text_input
+<PineUiPhoenix.text_input
   id="email"
   label="Email Address"
   type="email"
   placeholder="you@example.com"
 />
 
-<PineUi.text_input_with_icon
+<PineUiPhoenix.text_input_with_icon
   id="search"
   placeholder="Search..."
   icon={~H"<svg class='h-5 w-5 text-gray-400' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z' clip-rule='evenodd'/></svg>"}
 />
 
-<PineUi.textarea
+<PineUiPhoenix.textarea
   id="description"
   label="Description"
   rows={6}
@@ -164,14 +164,14 @@ Pine UI provides a collection of Phoenix Components that can be used in your HEE
 ### Select Inputs
 
 ```heex
-<PineUi.select
+<PineUiPhoenix.select
   id="country"
   label="Country"
   options={[{"us", "United States"}, {"ca", "Canada"}, {"mx", "Mexico"}]}
   selected="us"
 />
 
-<PineUi.select_grouped
+<PineUiPhoenix.select_grouped
   id="continent"
   label="Country"
   option_groups={[
@@ -180,7 +180,7 @@ Pine UI provides a collection of Phoenix Components that can be used in your HEE
   ]}
 />
 
-<PineUi.select_searchable
+<PineUiPhoenix.select_searchable
   id="country"
   label="Country"
   options={[{"us", "United States"}, {"ca", "Canada"}, {"mx", "Mexico"}]}
@@ -191,17 +191,17 @@ Pine UI provides a collection of Phoenix Components that can be used in your HEE
 ### Badges
 
 ```heex
-<PineUi.badge variant="success">
+<PineUiPhoenix.badge variant="success">
   Completed
-</PineUi.badge>
+</PineUiPhoenix.badge>
 
-<PineUi.badge_dot variant="warning">
+<PineUiPhoenix.badge_dot variant="warning">
   Pending
-</PineUi.badge_dot>
+</PineUiPhoenix.badge_dot>
 
-<PineUi.badge_dismissible variant="info">
+<PineUiPhoenix.badge_dismissible variant="info">
   New Feature
-</PineUi.badge_dismissible>
+</PineUiPhoenix.badge_dismissible>
 ```
 
 ## Roadmap
